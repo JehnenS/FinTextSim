@@ -25,6 +25,8 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
 - create test and train datasets - perform the test-/train-split topic-wise to ensure balanced learning by reducing the impact of class imbalance issues
 
 ### bertopic_models
+![beta](https://github.com/user-attachments/assets/ec8515dc-9f0f-43a4-82a7-72e7f3f9551d)
+
 - fit BERTopic models with varying embedding models
 - generation of embeddings with varying embedding models
 - generate parameters to evaluate NPMI coherence of BERTopic models
