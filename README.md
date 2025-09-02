@@ -37,12 +37,17 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
 - quantitatively evaluate NPMI coherence, topic-precision as well as inter- and intratopic similarity of both BERTopic and classical topic models
 - qualitative assessment of the generated topic representations
 
+### Results
+- contains results presented in the paper FinTextSim: Enhancing Financial Text Analysis with BERTopic: A Comparative Study of Topic Modeling Techniques by Jehnen et al. (2025) (https://doi.org/10.48550/arXiv.2504.15683)
+  - evaluation of embedding models on the test set
+  - quantitative results from BERTopic and classical topic modeling approaches
+  - qualitative results: topic assignments from BERTopic and classical topic modeling approaches to a selection of sentences  
+
 ## Expected Results
 
 ### FinTextSim vs. other embedding models on financial text (testset from training)
 FinTextSim will significantly outperform other embedding models on financial text, creating clear and distinct clusters of financial topics.
 Other embedding models will fail to capture the semantic concepts of financial text, leading to an indistinguishable mash of datapoints.
-
 
 ### Topic Quality
 Using BERTopic in conjunction with FinTextSim will be able to identify financial topics, clearly separating topic domains. Classical topic modeling approaches and BERTopic with other embedding models will fail to do so.
