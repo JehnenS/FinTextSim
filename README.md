@@ -33,8 +33,8 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
 - fit classical topic models (LDA, NMF)
 
 ### evaluation
-- evaluate the quality of the embedding models on the test set
-- evaluate NPMI coherence, topic-precision as well as inter- and intratopic similarity of both BERTopic and classical topic models
+- quantitative evaluation of the quality of the embedding models on the test set
+- quantitatively evaluate NPMI coherence, topic-precision as well as inter- and intratopic similarity of both BERTopic and classical topic models
 - qualitative assessment of the generated topic representations
 
 ## Expected Results
