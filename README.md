@@ -68,6 +68,15 @@ Other embedding models will fail to capture the semantic concepts of financial t
 
 ### Topic Quality
 Using BERTopic in conjunction with FinTextSim will be able to identify financial topics, clearly separating topic domains. 
+
+| Model                | Topic-Precision ↑ | NPMI Coherence ↓ | Weighted Coherence↑ |
+|-----------------------|--------------------------|---------------------------|------------------|
+| BERTopic-FinTextSim            | **1**                | 0.293                  | **0.293**             |
+| BERTopic-AM | 0                     | **0.387**                      | 0             |
+| BERTopic-MPNET     | 0.139                     | 0.382                      | 0.053             |
+| LDA     | 0                     | 0.039                      | 0             |
+| NMF     | 0.146                     | 0.239                      | 0.035             |
+
 The following plots show the created topic representations of the topic models. 
 The color of each word represents its associated unique topic from the keyword list. Words colored in black are not present in the keyword list.
 
@@ -89,6 +98,14 @@ Hence, FinTextSim is necessary to distinguish between financial topics in a larg
 Only when using BERTopic in combination with FinTextSim, a high intratopic similarity and low intertopic similarity can be expected.
 Without FinTextSim, BERTopic will struggle with misclassification and overlapping topics. 
 Thus, FinTextSim is pivotal for advancing financial text analysis.
+
+| Model                | Intertopic Similarity ↑ | Intratopic Similarity ↓ |
+|-----------------------|--------------------------|---------------------------|
+| BERTopic-FinTextSim            | **0.024**                | **0.966**                  | 
+| BERTopic-AM | 1                     | 0                      | 0             |
+| BERTopic-MPNET     | 1                     | 0.091                      | 
+| LDA     | 1                     | 0                      | 0             |
+| NMF     | 1                     | 0.129                      | 
 The following plots show examples of topic assignments on selected sentences across the different topic modeling techniques.
 
 **Example 1:** 
