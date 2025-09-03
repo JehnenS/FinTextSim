@@ -47,6 +47,13 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
 
 ### FinTextSim vs. other embedding models on financial text (testset from training)
 FinTextSim will significantly outperform other embedding models on financial text, creating clear and distinct clusters of financial topics.
+| Model                | Intratopic Similarity ↑ | Intertopic Similarity ↓ | Outliers within BERTopic↑ |
+|-----------------------|--------------------------|---------------------------|------------------|
+| FinTextSim            | **0.997**                | **-0.011**                  | **295,706**             |
+| all-MiniLM-L6-v2 (AM) | 0.583                     | 0.559                      | 781,965             |
+| all-mpnet-base-v2     | 0.626                     | 0.611                      | 784,225             |
+
+
 In the following plots, each datapoint represents a sentence from FinTextSim's testset. The color of the datapoint is associated with its financial topic.
 
 **FinTextSim**
