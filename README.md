@@ -105,6 +105,10 @@ Moreover, the improved insights have the potential to leverage business valuatio
 ## Citation
 To cite the FinTextSim paper, please use the following bibtex reference:
 
+**Jehnen, S., Ordieres-Meré, J., & Villalba-Díez, J. (2025).**  
+*FinTextSim: Enhancing Financial Text Analysis with BERTopic.*  
+arXiv:2504.15683. https://doi.org/10.48550/arXiv.2504.15683  
+
 ```bibtex
 @article{jehnen2025,
   title={FinTextSim: Enhancing Financial Text Analysis with BERTopic},
