@@ -65,6 +65,7 @@ Using BERTopic in conjunction with FinTextSim will be able to identify financial
 <img width="2000" height="1200" alt="wordcloud_bertopic_htl_modern_bert" src="https://github.com/user-attachments/assets/db386555-3149-4666-a158-fc86f77d5b37" />
 
 Classical topic modeling approaches and BERTopic with other embedding models will fail to do so.
+
 **BERTopic-AM**
 <img width="2000" height="1200" alt="wordcloud_bertopic_AM" src="https://github.com/user-attachments/assets/1194d7cc-a1ae-427d-9dc6-4dbe60c0723a" />
 
@@ -79,13 +80,16 @@ Only when using BERTopic in combination with FinTextSim, a high intratopic simil
 Without FinTextSim, BERTopic will struggle with misclassification and overlapping topics. 
 Thus, FinTextSim is pivotal for advancing financial text analysis.
 
-**Example 1: acquisitionrelated expenses and restructuring costs are recognized separately from the business combination and are expensed as incurred**
+**Example 1:** 
+Sentence: acquisitionrelated expenses and restructuring costs are recognized separately from the business combination and are expensed as incurred
 <img width="2500" height="500" alt="cost_57400" src="https://github.com/user-attachments/assets/18f1f302-4915-4e71-8739-36c374f5c4bb" />
 
-**Example 2: our commercial customers consist primarily of delivery customers for whom we deliver products from our store locations to our commercial customers places of business including independent garages service stations and auto dealers**
+**Example 2:** 
+Sentence: our commercial customers consist primarily of delivery customers for whom we deliver products from our store locations to our commercial customers places of business including independent garages service stations and auto dealers
 <img width="2500" height="500" alt="operations_7350" src="https://github.com/user-attachments/assets/b5e9b2f5-0114-4c77-b626-930ce6375d8c" />
 
-**Example 3: currencyneutral comparable operating profit declined due to the weakness in the australian cereal category and our performance in south africa**
+**Example 3:** 
+Sentence: currencyneutral comparable operating profit declined due to the weakness in the australian cereal category and our performance in south africa
 <img width="2500" height="500" alt="profit_loss_4500" src="https://github.com/user-attachments/assets/310f2055-bfa2-4198-9e90-f7eb4b4facf8" />
 
 
