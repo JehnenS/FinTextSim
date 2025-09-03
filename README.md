@@ -47,6 +47,7 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
 
 ### FinTextSim vs. other embedding models on financial text (testset from training)
 FinTextSim will significantly outperform other embedding models on financial text, creating clear and distinct clusters of financial topics.
+In the following plots, each datapoint represents a sentence from FinTextSim's testset. The color of the datapoint is associated with its financial topic.
 
 **FinTextSim**
 <img width="2160" height="1440" alt="red_embeddings_FinTextSim" src="https://github.com/user-attachments/assets/f7ad0f33-7f1a-4c18-bde9-1ff2afcbe498" />
@@ -60,6 +61,8 @@ Other embedding models will fail to capture the semantic concepts of financial t
 
 ### Topic Quality
 Using BERTopic in conjunction with FinTextSim will be able to identify financial topics, clearly separating topic domains. 
+The following plots show the created topic representations of the topic models. 
+The color of each word represents its associated unique topic from the keyword list. Words colored in black are not present in the keyword list.
 
 **BERTopic-FinTextSim**
 <img width="2000" height="1200" alt="wordcloud_bertopic_htl_modern_bert" src="https://github.com/user-attachments/assets/db386555-3149-4666-a158-fc86f77d5b37" />
@@ -79,6 +82,7 @@ Hence, FinTextSim is necessary to distinguish between financial topics in a larg
 Only when using BERTopic in combination with FinTextSim, a high intratopic similarity and low intertopic similarity can be expected.
 Without FinTextSim, BERTopic will struggle with misclassification and overlapping topics. 
 Thus, FinTextSim is pivotal for advancing financial text analysis.
+The following plots show examples of topic assignments on selected sentences across the different topic modeling techniques.
 
 **Example 1:** 
 Sentence: acquisitionrelated expenses and restructuring costs are recognized separately from the business combination and are expensed as incurred
@@ -101,6 +105,7 @@ Moreover, the improved insights have the potential to leverage business valuatio
 ## Citation
 To cite the FinTextSim paper, please use the following bibtex reference:
 
+```bibtex
 @article{jehnen2025,
   title={FinTextSim: Enhancing Financial Text Analysis with BERTopic},
   author={Jehnen, Simon and Ordieres-Mer{\'e}, Joaqu{\'\i}n and Villalba-D{\'\i}ez, Javier},
