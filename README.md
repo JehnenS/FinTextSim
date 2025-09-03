@@ -43,7 +43,7 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
   - quantitative results from BERTopic and classical topic modeling approaches
   - qualitative results: topic assignments from BERTopic and classical topic modeling approaches to a selection of sentences  
 
-## Expected Results
+## Results
 
 ### FinTextSim vs. other embedding models on financial text (testset from training)
 FinTextSim will significantly outperform other embedding models on financial text, creating clear and distinct clusters of financial topics.
