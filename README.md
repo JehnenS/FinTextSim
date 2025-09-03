@@ -47,7 +47,7 @@ The data can be found at: https://sraf.nd.edu/data/stage-one-10-x-parse-data/.
 
 ### FinTextSim vs. other embedding models on financial text (testset from training)
 FinTextSim will significantly outperform other embedding models on financial text, creating clear and distinct clusters of financial topics.
-| Model                | Intratopic Similarity ↑ | Intertopic Similarity ↓ | Outliers within BERTopic↑ |
+| Model                | Intratopic Similarity ↑ | Intertopic Similarity ↓ | Outliers within BERTopic ↓ |
 |-----------------------|--------------------------|---------------------------|------------------|
 | FinTextSim            | **0.997**                | **-0.011**                  | **295,706**             |
 | all-MiniLM-L6-v2 (AM) | 0.583                     | 0.559                      | 781,965             |
@@ -69,7 +69,7 @@ Other embedding models will fail to capture the semantic concepts of financial t
 ### Topic Quality
 Using BERTopic in conjunction with FinTextSim will be able to identify financial topics, clearly separating topic domains. 
 
-| Model                | Topic-Precision ↑ | NPMI Coherence ↓ | Weighted Coherence↑ |
+| Model                | Topic-Precision ↑ | NPMI Coherence ↑ | Weighted Coherence↑ |
 |-----------------------|--------------------------|---------------------------|------------------|
 | BERTopic-FinTextSim            | **1**                | 0.293                  | **0.293**             |
 | BERTopic-AM | 0                     | **0.387**                      | 0             |
@@ -99,7 +99,7 @@ Only when using BERTopic in combination with FinTextSim, a high intratopic simil
 Without FinTextSim, BERTopic will struggle with misclassification and overlapping topics. 
 Thus, FinTextSim is pivotal for advancing financial text analysis.
 
-| Model                | Intertopic Similarity ↑ | Intratopic Similarity ↓ |
+| Model                | Intertopic Similarity ↓ | Intratopic Similarity ↑ |
 |-----------------------|--------------------------|---------------------------|
 | BERTopic-FinTextSim            | **0.024**                | **0.966**                  | 
 | BERTopic-AM | 1                     | 0                      | 0             |
