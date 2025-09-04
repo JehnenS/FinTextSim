@@ -2,6 +2,9 @@ import pickle
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+import os
+
+os.chdir("/mnt/sdb1/home/simonj")
 
 
 #-----------------load texts and metadata
