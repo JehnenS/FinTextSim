@@ -7,7 +7,7 @@ import os
 os.chdir("/mnt/sdb1/home/simonj") #set working directory
 
 #------------load data
-file_loc = "paper1/Data/10-K/item7_old/item7_text.pkl"
+file_loc = "paper1/Data/10-K/item7/item7_text.pkl"
 
 with open(file_loc, "rb") as file:
     result_dict = pickle.load(file)
@@ -25,7 +25,7 @@ detector = OutlierDetector(
     metadata_list = item7_metadata,
     min_words_threshold = 250,
     z_score_threshold = 2.0,
-    output_dir = "paper1/Data/10-K/item7_old/item7_text_outlier.pkl"
+    output_dir = "paper1/Data/10-K/item7/item7_text_outlier.pkl"
 )
 
 detector.run()
