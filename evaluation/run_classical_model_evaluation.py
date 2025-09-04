@@ -48,7 +48,12 @@ model_names = [
     "nmf_tfidf"
 ]
 
-corpi = [corpus, corpus_tfidf, corpus, corpus_tfidf]
+corpi = [
+    #corpus, 
+    corpus_tfidf, 
+    #corpus, 
+    corpus_tfidf
+]
 
 from evaluation.ClassicalModelEvaluator import ClassicalModelEvaluator
 from labeled_dataset.utils_labeled_dataset import keywords, topic_names
