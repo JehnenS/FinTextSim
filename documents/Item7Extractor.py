@@ -101,12 +101,6 @@ class ItemExtractor:
             item7_text = text[item7:item8]
             return item7_text
     
-            # If all checks passed, we found our real section
-            return {
-                "item7_start": item7,
-                "item8_start": item8,
-                "item7_text": text[item7:item8]
-            }
     
         # No valid pattern found
         return None
