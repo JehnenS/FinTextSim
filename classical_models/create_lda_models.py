@@ -5,7 +5,7 @@ import os
 os.chdir("/mnt/sdb1/home/simonj") #set working directory
 
 #define path to save topic models
-saving_path = "paper1/Topic_Models/LDA/lda_"
+saving_path = "paper1/Topic_Models/LDA/lda"
 
 from labeled_dataset.utils_labeled_dataset import keywords
 
