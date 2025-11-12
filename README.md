@@ -1,4 +1,4 @@
-# FinTextSim: Enhancing Financial Text Analysis with BERTopic: A Comparative Study of Topic Modeling Techniques
+# FinTextSim: A Domain-Specific Sentence-Transformer for Extracting Predictive Latent Topics from Financial Disclosures
 Repository containing the code for training and evaluating FinTextSim as outlined in Jehnen et al. (2025) (https://doi.org/10.48550/arXiv.2504.15683).
 FinTextSim is a sentence-transformer optimized for clustering and semantic search of financial texts. 
 Compared to the most widely used sentence-transformers, FinTextSim increases intratopic similarity by up to 71% while simultaneously reducing intertopic similarity by 102%, allowing unprecedented separation between financial topics.
