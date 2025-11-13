@@ -39,6 +39,11 @@ Financial data is sourced from FinancialModelingPrep (https://site.financialmode
 - quantitatively evaluate NPMI coherence, topic-precision as well as inter- and intratopic similarity of both BERTopic and classical topic models
 - qualitative assessment of the generated topic representations
 
+### ml
+- preprocessing of ML framework
+- running of lightweight Logistic Regression ML framework
+- evaluation of ML results
+
 ### Results
 - contains results presented in the paper FinTextSim: Enhancing Financial Text Analysis with BERTopic: A Comparative Study of Topic Modeling Techniques by Jehnen et al. (2025) (https://doi.org/10.48550/arXiv.2504.15683)
   - evaluation of embedding models on the test set
