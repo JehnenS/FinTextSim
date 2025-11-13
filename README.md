@@ -41,7 +41,7 @@ Financial data is sourced from FinancialModelingPrep (https://site.financialmode
 
 ### ml
 - preprocessing of ML framework
-- running of lightweight Logistic Regression ML framework
+- running of lightweight Logistic Regression ML framework, predicting normalized ROA direction changes
 - evaluation of ML results
 
 ### Results
