@@ -40,7 +40,7 @@ Financial data is sourced from FinancialModelingPrep (https://site.financialmode
 - qualitative assessment of the generated topic representations
 
 ### ml
-- preprocessing of ML framework
+- preprocessing of ML-based corporate performance prediction framework
 - running of lightweight Logistic Regression ML framework, predicting normalized ROA direction changes
 - evaluation of ML results
 
