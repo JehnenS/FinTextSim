@@ -299,6 +299,12 @@ class BERTopicModelEvaluator:
     
         # Create subplots
         fig, axs = plt.subplots(num_rows, num_cols, figsize=figsize)
+
+        # Ensure axs is always 2D
+        if num_rows == 1:
+            axs = np.expand_dims(axs, axis=0)
+        if num_cols == 1:
+            axs = np.expand_dims(axs, axis=1)
     
         # Generate word cloud for each topic
         for i, words in enumerate(combined_word_list):
