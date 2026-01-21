@@ -102,7 +102,8 @@ The following plots show the created topic representations of the topic models.
 The color of each word represents its associated unique topic from the keyword list. Words colored in black are not present in the keyword list.
 
 **BERTopic-FinTextSim**
-<img width="2000" height="1200" alt="wordcloud_bertopic_htl_modern_bert" src="https://github.com/user-attachments/assets/db386555-3149-4666-a158-fc86f77d5b37" />
+![wordcloud_htl_temporal](https://github.com/user-attachments/assets/0607cdb9-8476-4096-be2f-554e0e97a97c)
+
 
 Classical topic modeling approaches and BERTopic with other embedding models will fail to do so.
 
@@ -131,16 +132,19 @@ Thus, FinTextSim is pivotal for advancing financial text analysis.
 The following plots show examples of topic assignments on selected sentences across the different topic modeling techniques.
 
 **Example 1:** 
-Sentence: acquisitionrelated expenses and restructuring costs are recognized separately from the business combination and are expensed as incurred
-<img width="2500" height="500" alt="cost_57400" src="https://github.com/user-attachments/assets/18f1f302-4915-4e71-8739-36c374f5c4bb" />
+Sentence: we calculate revpar by dividing hotel room revenue by total number of room nights available to guests for a given period
+![sales_130000](https://github.com/user-attachments/assets/8cecfdfd-2183-4d31-a24a-d94be2a4cc32)
+
 
 **Example 2:** 
-Sentence: our commercial customers consist primarily of delivery customers for whom we deliver products from our store locations to our commercial customers places of business including independent garages service stations and auto dealers
-<img width="2500" height="500" alt="operations_7350" src="https://github.com/user-attachments/assets/b5e9b2f5-0114-4c77-b626-930ce6375d8c" />
+Sentence: reported operating profit of million in was million or higher than reported operating profit of million in
+![profit_loss_884295](https://github.com/user-attachments/assets/0fd039e7-3459-4ac2-9f60-fd8bc65fb9e8)
+
 
 **Example 3:** 
-Sentence: currencyneutral comparable operating profit declined due to the weakness in the australian cereal category and our performance in south africa
-<img width="2500" height="500" alt="profit_loss_4500" src="https://github.com/user-attachments/assets/310f2055-bfa2-4198-9e90-f7eb4b4facf8" />
+Sentence: in the fourth quarter we recognized our frontline employees for their commitment and contributions to their communities during the pandemic with a award that was paid in january
+![hr_temporal_1769440](https://github.com/user-attachments/assets/2ce932b5-e298-4ed4-b440-d63481fc28b4)
+
 
 
 ### Predictive Validity
@@ -186,7 +190,7 @@ Finally, we demonstrate the practical value of FinTextSim in a downstream corpor
 ## Citation
 To cite the FinTextSim paper, please use the following bibtex reference:
 
-**Jehnen, S., Ordieres-Meré, J., & Villalba-Díez, J. (2025).**  
+**Jehnen, S., Ordieres-Meré, J., & Villalba-Díez, J. (2026).**  
 *FinTextSim: Enhancing Financial Text Analysis with BERTopic.*  
 arXiv:2504.15683. https://doi.org/10.48550/arXiv.2504.15683  
 
