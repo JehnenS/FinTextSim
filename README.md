@@ -73,7 +73,7 @@ FinTextSim will significantly outperform other embedding models on financial tex
 In the following plots, each datapoint represents a sentence from FinTextSim's testset. The color of the datapoint is associated with its financial topic.
 
 **FinTextSim**
-<img width="2160" height="1440" alt="red_embeddings_FinTextSim" src="https://github.com/user-attachments/assets/f7ad0f33-7f1a-4c18-bde9-1ff2afcbe498" />
+![red_embeddings_FinTextSim](https://github.com/user-attachments/assets/66001b4c-1467-49a4-bba1-48fdbda49b7b)
 Other embedding models will fail to capture the semantic concepts of financial text, leading to an indistinguishable mash of datapoints.
 
 **all-MiniLM-L6-v2 (AM)**
