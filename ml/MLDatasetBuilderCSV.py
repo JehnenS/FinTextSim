@@ -14,6 +14,7 @@ class MLDatasetBuilder:
                  text_features_fts: pd.DataFrame = None, # transformer-based sentence-level aggregated text features --> ticker and year_of_report as identifier
                  text_features_am: pd.DataFrame = None,
                  text_features_mpnet: pd.DataFrame = None,
+                 text_features_distil_roberta: pd.DataFrame = None,
                  text_features_lda_tf: pd.DataFrame = None,
                  text_features_lda_tfidf: pd.DataFrame = None,
                  text_features_nmf_tf: pd.DataFrame = None,
@@ -25,6 +26,7 @@ class MLDatasetBuilder:
         self.text_features_fts = text_features_fts
         self.text_features_am = text_features_am
         self.text_features_mpnet = text_features_mpnet
+        self.text_features_distil_roberta = text_features_distil_roberta
         self.text_features_lda_tf = text_features_lda_tf
         self.text_features_nmf_tf = text_features_nmf_tf
         self.text_features_lda_tfidf = text_features_lda_tfidf
@@ -123,6 +125,8 @@ class MLDatasetBuilder:
         df_fin_fts = self._merge_text_financials(target_base, self.financials, self.text_features_fts)
         df_fin_am = self._merge_text_financials(target_base, self.financials, self.text_features_am)
         df_fin_mpnet = self._merge_text_financials(target_base, self.financials, self.text_features_mpnet)
+        df_fin_distil_roberta = self._merge_text_financials(target_base, self.financials, self.text_features_distil_roberta)
+        
         df_fin_lda_tf = self._merge_text_financials(target_base, self.financials, self.text_features_lda_tf)
         df_fin_lda_tfidf = self._merge_text_financials(target_base, self.financials, self.text_features_lda_tfidf)
         df_fin_nmf_tf = self._merge_text_financials(target_base, self.financials, self.text_features_nmf_tf)
@@ -134,6 +138,7 @@ class MLDatasetBuilder:
         print(f"df_fin_fts: {df_fin_fts.shape}")
         print(f"df_fin_am: {df_fin_am.shape}")
         print(f"df_fin_mpnet: {df_fin_mpnet.shape}")
+        print(f"df_fin_distil_roberta: {df_fin_distil_roberta.shape}")
         #print(f"df_fin_lda_tf: {df_fin_lda_tf.shape}")
         print(f"df_fin_lda_tfidf: {df_fin_lda_tfidf.shape}")
         #print(f"df_fin_nmf_tf: {df_fin_nmf_tf.shape}")
@@ -142,4 +147,4 @@ class MLDatasetBuilder:
         #assert df_fin_only.shape[0] == df_fin_fts.shape[0] == df_fin_am.shape[0] == df_fin_mpnet.shape[0] == df_fin_lda_tf.shape[0] == df_fin_lda_tfidf.shape[0] == df_fin_nmf_tf.shape[0] == df_fin_nmf_tfidf.shape[0], "Mismatch between number of rows of the dfs"
         
 
-        return df_fin_only, df_fin_fts, df_fin_am, df_fin_mpnet, df_fin_lda_tf, df_fin_lda_tfidf, df_fin_nmf_tf, df_fin_nmf_tfidf
+        return df_fin_only, df_fin_fts, df_fin_am, df_fin_mpnet, df_fin_distil_roberta, df_fin_lda_tf, df_fin_lda_tfidf, df_fin_nmf_tf, df_fin_nmf_tfidf
