@@ -179,7 +179,7 @@ class TopicAssignmentEvaluator:
     
         
         if plot_name:
-            plt_loc = f"paper1/Results/topic_assignments/{plot_name}_{doc_num}.png"
+            plt_loc = f"paper1/Results/topic_assignments/{plot_name}_{doc_num}.jpg"
             plt.savefig(plt_loc)
             print(f"Figure saved to {plt_loc}")
     
