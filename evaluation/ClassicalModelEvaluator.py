@@ -132,7 +132,7 @@ class ClassicalModelEvaluator:
     
         # Save the figure if output_dir is specified
         if plot_name is not None:
-            directory = f"paper1/Results/Classical_Models/wordcloud_{plot_name}.png"
+            directory = f"paper1/Results/Classical_Models/wordcloud_{plot_name}.jpg"
             plt.savefig(directory)
             print(f"Plot saved to: {directory}")
         
@@ -465,6 +465,15 @@ class ClassicalModelEvaluator:
         main_topics = self._determine_main_topic_(gamma_matrix)
             
         return beta_matrix, gamma_matrix, main_topics
+
+    def _baseline_adjust_(self, sim_array, baseline: float = 0.5):
+        """
+        Shift similarity scores by a neutral baseline.
+        sim_array: np.array or list of similarities in [0,1]
+        baseline: neutral similarity
+        Returns array centered at zero
+        """
+        return np.array(sim_array) - baseline
     
         
     def intertopic_similarity_gamma(self, topic_embeddings):
