@@ -41,6 +41,21 @@ def create_test_dataset(dataset, test_ratio = 0.2):
     return train_dataset, test_dataset
 
 
+def year_based_split(labeled_dataset, ld_metatada, year_test_start):
+    """
+    Split labeled dataset into test- and train-set based on years
+    """
+    years_of_report = [int(meta.get("year_of_report")) for meta in ld_metatada]
+    
+    train_set = [entry for entry, year in zip(labeled_dataset, years_of_report) if year < year_test_start]
+    test_set = [entry for entry, year in zip(labeled_dataset, years_of_report) if year >= year_test_start]
+
+    print(f"Number of train instances: {len(train_set)}")
+    print(f"Number of test instances: {len(test_set)}")
+    print(f"Train share: {len(train_set)/len(labeled_dataset)*100:.2f}%")
+    return train_set, test_set
+
+
 from collections import defaultdict
 from random import choice
 
