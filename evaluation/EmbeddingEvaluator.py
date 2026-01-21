@@ -102,7 +102,7 @@ class EmbeddingEvaluator:
         #plt.xticks(self.topic_names)
         
         if fig_name is not None:
-            file_path = f"paper1/Results/Embeddings/test_data/cosine_sim_matrix_{fig_name}.png"
+            file_path = f"paper1/Results/Embeddings/test_data/cosine_sim_matrix_{fig_name}.jpg"
             plt.savefig(file_path, dpi=300, bbox_inches="tight")
             print(f"Plot saved as {file_path}")
         plt.show()
@@ -265,7 +265,7 @@ class EmbeddingEvaluator:
         )
     
         if fig_name is not None:
-            file_path = f"paper1/Results/Embeddings/test_data/red_embeddings_{fig_name}.png"
+            file_path = f"paper1/Results/Embeddings/test_data/red_embeddings_{fig_name}.jpg"
             fig.write_image(file_path, scale=2)  # scale=2 → higher resolution
             print(f"Plot saved as {file_path}")
         
