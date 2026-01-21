@@ -1,8 +1,12 @@
 # FinTextSim: A Domain-Specific Sentence-Transformer for Extracting Predictive Latent Topics from Financial Disclosures
-Repository containing the code for training and evaluating FinTextSim as outlined in Jehnen et al. (2025) (https://doi.org/10.48550/arXiv.2504.15683).
+Repository containing the code for training and evaluating FinTextSim as outlined in Jehnen et al. (2026) (https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1752103/abstract).
 FinTextSim is a sentence-transformer optimized for clustering and semantic search of financial texts. 
-Compared to the most widely used sentence-transformers, FinTextSim increases intratopic similarity by up to 71% while simultaneously reducing intertopic similarity by 102%, allowing unprecedented separation between financial topics.
+Compared to the most widely used sentence-transformers and financial baselines, FinTextSim increases intratopic similarity by up to 71% while simultaneously reducing intertopic similarity by more than 108%, allowing unprecedented separation between financial topics.
 Crucially, these qualitative gains translate into quantitative predictive benefits: incorporating FinTextSim-derived topic features into a logistic regression framework for corporate performance prediction leads to a statistically significant two-percentage-point increase in both ROC-AUC and F1-score over a purely financial baseline. 
+In contrast, off-the-shelf sentence-transformers and classical topic models introduce noise that degrades predictive performance. 
+For non-linear classifiers, several textual representations yield modest gains, reflecting their greater capacity to absorb noisier features. 
+However, FinTextSim remains the most stable and consistently strong performer across both linear and non-linear settings.
+
 The processing of the code is organized into several modules.
 
 ## Data Origin
@@ -24,7 +28,10 @@ Financial data is sourced from FinancialModelingPrep (https://site.financialmode
 
 ### fintextsim
 - train FinTextSim with BatchHardTripletLoss based on the created labeled dataset
-- create test and train datasets - perform the test-/train-split topic-wise to ensure balanced learning by reducing the impact of class imbalance issues
+- create test and train datasets - perform the test-/train-split temporal to avoid data leakage
+
+### feature_creation
+- create financial and textual features
 
 ### bertopic_models
 - fit BERTopic models with varying embedding models
@@ -41,15 +48,15 @@ Financial data is sourced from FinancialModelingPrep (https://site.financialmode
 
 ### ml
 - preprocessing of ML-based corporate performance prediction framework
-- running of lightweight Logistic Regression ML framework, predicting normalized ROA direction changes
+- running of lightweight Logistic Regression and XGBoost ML framework, predicting normalized ROA direction changes
 - evaluation of ML results
 
 ### Results
-- contains results presented in the paper FinTextSim: Enhancing Financial Text Analysis with BERTopic: A Comparative Study of Topic Modeling Techniques by Jehnen et al. (2025) (https://doi.org/10.48550/arXiv.2504.15683)
+- contains results presented in the paper FinTextSim: Enhancing Financial Text Analysis with BERTopic: A Comparative Study of Topic Modeling Techniques by Jehnen et al. (2026) (https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1752103/abstract)
   - evaluation of embedding models on the test set
   - quantitative results from BERTopic and classical topic modeling approaches
   - qualitative results: topic assignments from BERTopic and classical topic modeling approaches to a selection of sentences
-  - predictive validity: incorporating FinTextSim-derived topic features into a logistic regression framework for corporate performance prediction leads to a statistically significant two-percentage-point increase in both ROC-AUC and F1-score over a purely financial baseline. In contrast, off-the-shelf sentence-transformers and classical topic models introduce noise that degrades predictive performance. 
+  - predictive validity: incorporating FinTextSim-derived topic features into a logistic regression framework for corporate performance prediction leads to a statistically significant two-percentage-point increase in both ROC-AUC and F1-score over a purely financial baseline. In contrast, off-the-shelf sentence-transformers and classical topic models introduce noise that degrades predictive performance. For non-linear classifiers, several textual representations yield modest gains, reflecting their greater capacity to absorb noisier features. However, FinTextSim remains the most stable and consistently strong performer across both linear and non-linear settings.
 
 ## Results
 
@@ -57,9 +64,10 @@ Financial data is sourced from FinancialModelingPrep (https://site.financialmode
 FinTextSim will significantly outperform other embedding models on financial text, creating clear and distinct clusters of financial topics.
 | Model                | Intratopic Similarity ↑ | Intertopic Similarity ↓ | Outliers within BERTopic ↓ |
 |-----------------------|--------------------------|---------------------------|------------------|
-| FinTextSim            | **0.997**                | **-0.011**                  | **295,706**             |
-| all-MiniLM-L6-v2 (AM) | 0.583                     | 0.559                      | 781,965             |
-| all-mpnet-base-v2     | 0.626                     | 0.611                      | 784,225             |
+| FinTextSim            | **0.998**                | **-0.075**                  | **240,823**             |
+| all-MiniLM-L6-v2 (AM) | 0.584                     | 0.563                      | 781,965             |
+| all-mpnet-base-v2     | 0.614                     | 0.625                      | 784,225             |
+| distil-RoBERTa      | 0.773                    | 0.883                        | 1,332,620          |
 
 
 In the following plots, each datapoint represents a sentence from FinTextSim's testset. The color of the datapoint is associated with its financial topic.
@@ -74,16 +82,20 @@ Other embedding models will fail to capture the semantic concepts of financial t
 **all-mpnet-base-v2 (MPNET)**
 <img width="2160" height="1440" alt="red_embeddings_MPNET" src="https://github.com/user-attachments/assets/3705ed6a-70a3-4c54-b157-d8cd21be95cb" />
 
+**distilroberta-finetuned-financial-news-sentiment-analysis (DR)**
+<img width="2160" height="1440" alt="red_embeddings_MPNET" src="https://github.com/user-attachments/assets/3705ed6a-70a3-4c54-b157-d8cd21be95cb" />
+
 ### Topic Quality
 Using BERTopic in conjunction with FinTextSim will be able to identify financial topics, clearly separating topic domains. 
 
-| Model                | Topic-Precision ↑ | NPMI Coherence ↑ | Weighted Coherence↑ |
-|-----------------------|--------------------------|---------------------------|------------------|
-| BERTopic-FinTextSim            | **1**                | 0.293                  | **0.293**             |
-| BERTopic-AM | 0                     | **0.387**                      | 0             |
-| BERTopic-MPNET     | 0.139                     | 0.382                      | 0.053             |
-| LDA     | 0                     | 0.039                      | 0             |
-| NMF     | 0.146                     | 0.239                      | 0.035             |
+| Model                  | Topic-Accuracy ↑   | NPMI Coherence ↑ |
+|-----------------------|---------------------|------------------|
+| BERTopic-FinTextSim   | **0.81**            | 0.287            | 
+| BERTopic-AM           | 0.06                | **0.387**        |
+| BERTopic-MPNET        | 0.23                | 0.382            |
+| BERTopic-DR           | 0.09                | 0.368            |
+| LDA                   | 0                   | 0.039            |
+| NMF                   | 0.11                | 0.239            |
 
 The following plots show the created topic representations of the topic models. 
 The color of each word represents its associated unique topic from the keyword list. Words colored in black are not present in the keyword list.
@@ -107,13 +119,14 @@ Only when using BERTopic in combination with FinTextSim, a high intratopic simil
 Without FinTextSim, BERTopic will struggle with misclassification and overlapping topics. 
 Thus, FinTextSim is pivotal for advancing financial text analysis.
 
-| Model                | Intertopic Similarity ↓ | Intratopic Similarity ↑ |
-|-----------------------|--------------------------|---------------------------|
-| BERTopic-FinTextSim            | **0.024**                | **0.966**                  | 
-| BERTopic-AM | 1                     | 0                      | 0             |
-| BERTopic-MPNET     | 1                     | 0.091                      | 
-| LDA     | 1                     | 0                      | 0             |
-| NMF     | 1                     | 0.129                      | 
+| Model                  | Intertopic Similarity ↓ | Intratopic Similarity ↑ |
+|------------------------|-------------------------|---------------------------|
+| BERTopic-FinTextSim    | **-0.034**              | **0.939**                  | 
+| BERTopic-AM            | 0.465                   | 0.596                           |
+| BERTopic-MPNET         | 0.511                   | 0.656                     | 
+| BERTopic-DR            | 0.745                   | 0.948                      | 
+| LDA                    | 1                       | 0                       |
+| NMF                    | 0.202                   | 0.881                      | 
 The following plots show examples of topic assignments on selected sentences across the different topic modeling techniques.
 
 **Example 1:** 
@@ -130,19 +143,35 @@ Sentence: currencyneutral comparable operating profit declined due to the weakne
 
 
 ### Predictive Validity
-Our results show that improved textual representations translate into tangible predictive benefits.
+
+#### Logistic Regression
+Our results for LR show that improved textual representations translate into tangible predictive benefits.
 Only the topics generated by BERTopic in combination with FinTextSim yield a significant improvement in predictive power over purely financial features, as evidenced by a two-percentage-point increase in ROC-AUC and F1-score. 
 In contrast, OTS sentence-transformers and classical topic models provide no improvement and, in some cases, even degrade performance, indicating that their latent features introduce noise rather than signal.
 
 | Model                | Accuracy ↑ | F1-Score ↑ | AUC-ROC ↑ |
 |-----------------------|--------------------------|---------------------------|---------------------------|
 | Financial             | 0.692               |0.578                  | 0.688 |
-| Financial + AM | 0.638                     | 0.533                      | 0.646             |
+| Financial + AM       | 0.638                     | 0.533                      | 0.646             |
 | Financial + MPNET     | 0.669                     | 0.565                      | 0.658 |
 | Financial + FinTextSim     | 0.686                     | **0.599**                      | **0.708** |
+| Financial + DR     | 0.665                     | 0.539                      | 0.667 |
 | LDA     | 0.674                     | 0.556                      | 0.677             |
 | NMF     | 0.662                     | 0.564                      | 0.690 |
 
+
+#### XGBoost
+For XGBoost, several textual representations yield modest gains, reflecting their greater capacity to absorb noisier features. However, FinTextSim remains the most stable and consistently strong performer across both linear and non-linear settings.
+
+| Model                | Accuracy ↑ | F1-Score ↑ | AUC-ROC ↑ |
+|-----------------------|--------------------------|---------------------------|---------------------------|
+| Financial             | 0.636               |0.603                  | 0.672 |
+| Financial + AM       | 0.663                     | **0.626**                      | 0.674             |
+| Financial + MPNET     | 0.648                     | 0.580                      | 0.667 |
+| Financial + FinTextSim     | 0.660                     | 0.612                      | **0.686** |
+| Financial + DR     | 0.657                     | 0.594                      | 0.676 |
+| LDA     | **0.670**                     | 0.622                      | 0.676             |
+| NMF     | 0.667                     | 0.608                      | 0.682 |
 
 
 ## Implications
@@ -152,6 +181,7 @@ Second, FinTextSim strengthens the informational content of textual data, allowi
 Third, by bridging classical and contemporary topic modeling techniques, we establish a foundation for methodologically consistent and empirically validated model selection in financial text analysis.
 Finally, we demonstrate the practical value of FinTextSim in a downstream corporate performance prediction task. Thus, our research lays the foundation for integrating narrative information into valuation and forecasting frameworks, highlighting that qualitative disclosures can complement quantitative financial metrics in predictive applications.
 
+
 ## Citation
 To cite the FinTextSim paper, please use the following bibtex reference:
 
@@ -160,9 +190,9 @@ To cite the FinTextSim paper, please use the following bibtex reference:
 arXiv:2504.15683. https://doi.org/10.48550/arXiv.2504.15683  
 
 ```bibtex
-@article{jehnen2025,
-  title={FinTextSim: Enhancing Financial Text Analysis with BERTopic},
+@article{jehnen2026,
+  title={FinTextSim: A Domain-Specific Sentence-Transformer for Extracting Predictive Latent Topics from Financial Disclosures},
   author={Jehnen, Simon and Ordieres-Mer{\'e}, Joaqu{\'\i}n and Villalba-D{\'\i}ez, Javier},
-  journal={arXiv preprint arXiv:2504.15683},
-  year={2025}
+  journal={Frontiers in Artificial Intelligence},
+  year={2026}
 }
