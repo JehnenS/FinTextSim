@@ -83,7 +83,8 @@ Other embedding models will fail to capture the semantic concepts of financial t
 <img width="2160" height="1440" alt="red_embeddings_MPNET" src="https://github.com/user-attachments/assets/3705ed6a-70a3-4c54-b157-d8cd21be95cb" />
 
 **distilroberta-finetuned-financial-news-sentiment-analysis (DR)**
-<img width="2160" height="1440" alt="red_embeddings_MPNET" src="https://github.com/user-attachments/assets/3705ed6a-70a3-4c54-b157-d8cd21be95cb" />
+![red_embeddings_DR](https://github.com/user-attachments/assets/fafdb1e0-d18d-477a-b788-2e9d4fe62c65)
+
 
 ### Topic Quality
 Using BERTopic in conjunction with FinTextSim will be able to identify financial topics, clearly separating topic domains. 
