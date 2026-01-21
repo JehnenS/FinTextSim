@@ -64,8 +64,13 @@ class BERTopicModelEvaluator:
         """
         Extract the top-n topic-words for each topic from the BERTopic model (based on ctf-idf score)
         """
-        num_topics = len(self.bertopic_model.get_topic_freq())
-        topic_words = [[words for words, _ in self.bertopic_model.get_topic(topic)] for topic in range(num_topics - 1)] #exclude topic -1 --> outliers
+        #get number of topics - exclude outlier topic
+        topics = self.bertopic_model.get_topic_freq()
+        clean_topics = topics[topics["Topic"] != -1]
+        num_topics = len(clean_topics)
+
+        #extract and lemmatize topic words
+        topic_words = [[words for words, _ in self.bertopic_model.get_topic(topic)] for topic in range(num_topics)] #iterate over each topic
         topic_words_rel = [word[:self.num_words] for word in topic_words] #get top-n-words per topic --> representative words
     
         return topic_words_rel
@@ -348,7 +353,7 @@ class BERTopicModelEvaluator:
     
         # Save the figure if output_dir is specified
         if plot_name:
-            directory = f"paper1/Results/BERTopic_Models/wordcloud_{plot_name}.png"
+            directory = f"paper1/Results/BERTopic_Models/wordcloud_{plot_name}.jpg"
             plt.savefig(directory)
             print(f"Plot saved to: {directory}")
     
@@ -417,9 +422,13 @@ class BERTopicModelEvaluator:
  
         self.topic_embeddings = np.vstack(topic_embeddings) #stack topic embeddings back in a matrix
     
+    def _normalize_cosine_(self, cosine_matrix):
+        """
+        Normalize cosine similarity values from [-1, 1] to [0, 1].
+        """
+        return (cosine_matrix + 1.0) / 2.0
     
-    
-    def calculate_intertopic_cosine_similarity(self):
+    def calculate_intertopic_cosine_similarity(self, normalize:bool = True, baseline_subtract: bool = True):
         """
         Accelerated calculation of intertopic cosine similarity using cuML.
         Returns:
@@ -436,6 +445,14 @@ class BERTopicModelEvaluator:
 
         #3. bring similarit matrix back to CPU
         cosine_sim_matrix_cpu = cp.asnumpy(cosine_sim_matrix)
+        assert np.all(cosine_sim_matrix_cpu >= -1) and np.all(cosine_sim_matrix_cpu <= 1) #assert similarities before normalization
+        if normalize:
+            cosine_sim_matrix_cpu = self._normalize_cosine_(cosine_sim_matrix_cpu) #normalize cosine similarity matrix to range from 0 to 1
+            assert np.all(cosine_sim_matrix_cpu >= 0) and np.all(cosine_sim_matrix_cpu <= 1) #assert similarities after normalization
+
+        #subtract neutral baseline (0.5) if requested
+        if baseline_subtract:
+            cosine_sim_matrix_cpu = cosine_sim_matrix_cpu - 0.5
 
         #4. extract upper triangle without diagonal
         upper_triangle_indices = np.triu_indices(cosine_sim_matrix_cpu.shape[0], k=1)
@@ -447,7 +464,7 @@ class BERTopicModelEvaluator:
         print(f"Mean intertopic similarity: {mean_upper_triangle:.3f}")
         return cosine_sim_matrix_cpu, mean_upper_triangle
 
-    def calculate_intratopic_cosine_similarity(self):
+    def calculate_intratopic_cosine_similarity(self, normalize:bool = True, baseline_subtract:bool = True):
         """
         Calculate the mean cosine similarity between sentence embeddings of each topic
         and the corresponding topic embeddings.
@@ -476,7 +493,18 @@ class BERTopicModelEvaluator:
                                                        topic_embedding.reshape(1, -1),
                                                        metric='cosine')
 
-            cosine_similarities.append(cp.asnumpy(cosine_sim_matrix[:, 0]))
+            sim = cp.asnumpy(cosine_sim_matrix[:, 0])
+
+            #normalize similarity to range between 0 and 1
+            if normalize:
+                sim = self._normalize_cosine_(sim)
+
+            #subtract baseline
+            if baseline_subtract:
+                sim = sim - 0.5  # Center at neutral baseline
+
+            #append similarity score
+            cosine_similarities.append(sim)
 
         #mean similarity per topic
         mean_intratopic_sim_per_topic = [np.mean(arr) for arr in cosine_similarities] #take the mean of each array to get each topic's intratopic similarity
@@ -485,7 +513,7 @@ class BERTopicModelEvaluator:
         print(f"Mean intratopic similarity: {mean_intratopic_sim:.3f}")
         return cosine_similarities, mean_intratopic_sim
 
-    def run_topic_similarities(self):
+    def run_topic_similarities(self, normalize:bool = True, baseline_subtract:bool = True):
         """
         Wrapper method to perform the evaluation of topic similarities.
         Returns:
@@ -495,8 +523,8 @@ class BERTopicModelEvaluator:
         self._create_topic_embeddings_() #create topic embeddings
 
         #calculate topic similarities
-        intertopic_cosine_sim_matrix, mean_upper_triangle = self.calculate_intertopic_cosine_similarity()
-        intratopic_cosine_similarities, mean_intratopic_sim = self.calculate_intratopic_cosine_similarity()
+        intertopic_cosine_sim_matrix, mean_upper_triangle = self.calculate_intertopic_cosine_similarity(normalize, baseline_subtract)
+        intratopic_cosine_similarities, mean_intratopic_sim = self.calculate_intratopic_cosine_similarity(normalize, baseline_subtract)
 
         return {
             "intertopic_cosine_sim_matrix": intertopic_cosine_sim_matrix,
@@ -505,7 +533,7 @@ class BERTopicModelEvaluator:
             "mean_intratopic_sim": mean_intratopic_sim
         }
 
-    def run(self, plot_name):
+    def run(self, plot_name, normalize:bool = False, baseline_subtract:bool = False):
         """
         Wrapper method to run both coherence and topic similarity evaluation
         """
@@ -516,7 +544,7 @@ class BERTopicModelEvaluator:
         topic_precision = coherence_results["topic_precision"]
     
         #run topic similarity evaluation
-        topic_similarities = self.run_topic_similarities()
+        topic_similarities = self.run_topic_similarities(normalize, baseline_subtract)
         if topic_precision > 0:
             weighted_intratopic_sim = topic_similarities["mean_intratopic_sim"] * topic_precision
             weighted_intertopic_sim = min(1, topic_similarities["upper_triangle_intertopic_sim"] / topic_precision) #keep intertopic_sim in range of max. 1
