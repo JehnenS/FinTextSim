@@ -199,5 +199,6 @@ arXiv:2504.15683. https://doi.org/10.48550/arXiv.2504.15683
   title={FinTextSim: A Domain-Specific Sentence-Transformer for Extracting Predictive Latent Topics from Financial Disclosures},
   author={Jehnen, Simon and Ordieres-Mer{\'e}, Joaqu{\'\i}n and Villalba-D{\'\i}ez, Javier},
   journal={Frontiers in Artificial Intelligence},
+  volume={9},
   year={2026}
 }
