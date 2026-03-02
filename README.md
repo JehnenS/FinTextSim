@@ -1,5 +1,5 @@
 # FinTextSim: A Domain-Specific Sentence-Transformer for Extracting Predictive Latent Topics from Financial Disclosures
-Repository containing the code for training and evaluating FinTextSim as outlined in Jehnen et al. (2026) (https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1752103/abstract).
+Repository containing the code for training and evaluating FinTextSim as outlined in Jehnen et al. (2026) (https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1752103/abstract](https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1752103/full#s7).
 FinTextSim is a sentence-transformer optimized for clustering and semantic search of financial texts. 
 Compared to the most widely used sentence-transformers and financial baselines, FinTextSim increases intratopic similarity by up to 71% while simultaneously reducing intertopic similarity by more than 108%, allowing unprecedented separation between financial topics.
 Crucially, these qualitative gains translate into quantitative predictive benefits: incorporating FinTextSim-derived topic features into a logistic regression framework for corporate performance prediction leads to a statistically significant two-percentage-point increase in both ROC-AUC and F1-score over a purely financial baseline. 
